@@ -2,24 +2,20 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CreditCardAPI;
 using CreditCardAPI.Controllers;
+using NUnit.Framework;
 
 namespace CreditCardAPI.Tests.Controllers
 {
-	[TestClass]
+	[TestFixture]
 	public class HomeControllerTest
 	{
-		[TestMethod]
-		public void Index()
+		[Test]
+		public void HomeControllerIndexMethodShouldRedirectToSwaggerPage()
 		{
-			// Arrange
-			HomeController controller = new HomeController();
-
-			// Act
-			ViewResult result = controller.Index() as ViewResult;
-
-			// Assert
-			Assert.IsNotNull(result);
-			Assert.AreEqual("Home Page", result.ViewBag.Title);
+			var homeContoller = new HomeController();
+			var result = homeContoller.Index() as RedirectResult;
+			NUnit.Framework.Assert.IsNotNull(result);
+			NUnit.Framework.Assert.AreEqual(result.Url, "~/swagger");
 		}
 	}
 }

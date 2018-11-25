@@ -34,20 +34,37 @@ namespace CreditCardAPI.Helpers
 
 			//check creditcardnumber  Pattern		
 			string pattern = @"^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|(?:352[89]|35[3-8][0-9])\d{12})$";
-			message = (creditcardnumber.Length < 15 && creditcardnumber.Length > 16) ?
-											Constants.InvalidRequest_creditcardNumberOutofLength :
-											(!Regex.IsMatch(creditcardnumber, pattern)) ? Constants.InvalidRequest_UnknownCreditcard : string.Empty;
+			if (creditcardnumber.Length >= 15 && creditcardnumber.Length <= 16)
+			{
+				if (!Regex.IsMatch(creditcardnumber, pattern))
+				{
+					CreditCardLogManager.Error(Constants.InvalidRequest_UnknownCreditcard, currentClass, currentMethod);
+					return Constants.InvalidRequest_UnknownCreditcard;
+				}
+			}
+			else
+			{
+				CreditCardLogManager.Error(Constants.InvalidRequest_creditcardNumberOutofLength, currentClass, currentMethod);
+				return Constants.InvalidRequest_creditcardNumberOutofLength;
+			}
+
 			
 			//check expirydate Pattern			
-			 string expirydatePattern = @"^((0[1-9])|(1[0-2]))(\d{4})$";
-				message = (expirydate.Length != 6) ?
-												 Constants.InvalidRequest_expirydateOutofLength :
-												(!Regex.IsMatch(expirydate, expirydatePattern)) ? Constants.InvalidRequest_UnknownExpirydate : string.Empty;
-
-
-			if(!string.IsNullOrEmpty(message))
-				CreditCardLogManager.Error(message, currentClass, currentMethod);
-
+			string expirydatePattern = @"^((0[1-9])|(1[0-2]))(\d{4})$";
+			if (expirydate.Length == 6)
+			{
+				if (!Regex.IsMatch(expirydate, expirydatePattern))
+				{
+					CreditCardLogManager.Error(Constants.InvalidRequest_UnknownExpirydate, currentClass, currentMethod);
+					return Constants.InvalidRequest_UnknownExpirydate;
+				}
+			}
+			else {
+				CreditCardLogManager.Error(Constants.InvalidRequest_expirydateOutofLength, currentClass, currentMethod);
+				return Constants.InvalidRequest_expirydateOutofLength;
+			}
+			
+			
 			return message;
 		}		
 	}

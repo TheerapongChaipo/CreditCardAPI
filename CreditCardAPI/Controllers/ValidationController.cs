@@ -37,7 +37,6 @@ namespace CreditCardAPI.Controllers
 			}
 
 
-
 			return Request.CreateResponse(HttpStatusCode.OK, new ValidateCreditCardResponse() {
 				CreditCardNumber = creditcardnumber,
 				StatusCode = (int)HttpStatusCode.OK,
