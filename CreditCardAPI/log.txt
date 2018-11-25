@@ -1,0 +1,5 @@
+2018-11-25 12:06:18,283 - INFO - ValidationController:ValidateCreditCard: 2131213213
+2018-11-25 12:09:58,393 - INFO - ValidationController:ValidateCreditCard:frefrggerg
+2018-11-25 12:12:51,917 - INFO - ValidationController:ValidateCreditCard:Entering - Card Number : 213123, Expiry Date : 31232
+2018-11-25 12:14:25,922 - INFO - ValidationController:ValidateCreditCard:Entering - Card Number : 34, Expiry Date : 234
+2018-11-25 12:16:02,633 - INFO - ValidationController:ValidateCreditCard:Entering - Card Number : 2312, Expiry Date : 3123
