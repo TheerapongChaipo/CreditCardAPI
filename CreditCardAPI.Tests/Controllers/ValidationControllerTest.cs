@@ -36,6 +36,7 @@ namespace CreditCardAPI.Tests.Controllers
 			controller  = null;
 		}
 
+		#region BadRequestTest
 
 		[Test]
 		public void ValidateCreditCard_BadRequestWithEmpty_CreditCardNumber_ShouldReturn400()
@@ -105,7 +106,7 @@ namespace CreditCardAPI.Tests.Controllers
 			//Arrange	
 			var expectedModelResponse = new ValidateCreditCardResponse
 			{
-				StatusCode = 400,				
+				StatusCode = 400,
 				StatusMessage = "Invalid - Credit Card Number out of length."
 			};
 
@@ -120,7 +121,7 @@ namespace CreditCardAPI.Tests.Controllers
 
 			//Assert
 			Assert.AreEqual(HttpStatusCode.BadRequest, actualResult.StatusCode);
-			Assert.AreEqual(expectedModelResponse.StatusCode, actualResponse.StatusCode);			
+			Assert.AreEqual(expectedModelResponse.StatusCode, actualResponse.StatusCode);
 			Assert.AreEqual(expectedModelResponse.StatusMessage, actualResponse.StatusMessage);
 		}
 
@@ -149,8 +150,8 @@ namespace CreditCardAPI.Tests.Controllers
 			Assert.AreEqual(expectedModelResponse.StatusMessage, actualResponse.StatusMessage);
 		}
 
-
-
+		#endregion
+		
 		[Test]
 		public void ValidateCreditCard_ValidRequest_ShouldReturnValidCardandStatus200()
 		{
@@ -179,102 +180,6 @@ namespace CreditCardAPI.Tests.Controllers
 			Assert.AreEqual(expectedModelResponse.IsExist, actualResponse.IsExist);
 			Assert.AreEqual(expectedModelResponse.IsValid, actualResponse.IsValid);		
 		}
-
-	/*	[Test]
-		public void GetUsersByUuids_ShouldCallUsersManagerGetUsersByQueryStringMethodAtLeastOnce()
-		{
-			//Arrange
-			_mockRepository.Setup(m => m.SearchUsers(It.IsAny<SearchQuery>())).Returns(new SearchResult<DTO.User>());
-			var controller = new UsersController(_mockRepository.Object) { Request = new HttpRequestMessage() };
-			controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-			controller.Request.RequestUri = new Uri(@"http://localhost:65032/identityapi/v1/users?q=uuid:uuid1,uuid2");
-
-			//Act
-			controller.GetUsers("uuid:uuid1,uuid2");
-
-			//Assert
-			_mockRepository.Verify(m => m.SearchUsers(It.IsAny<SearchQuery>()), Times.Once());
-		}
-
-		[Test]
-		public void GetUsersByUuids_NotExist_ShouldThrowHttpStatusOKWithEmptyResult()
-		{
-			//Arrange
-			_mockRepository.Setup(m => m.SearchUsers(It.IsAny<SearchQuery>())).Returns(new SearchResult<DTO.User>
-			{
-				Count = 0,
-				Total = 0,
-				Items = new DTO.User[] { }
-			});
-			var controller = new UsersController(_mockRepository.Object) { Request = new HttpRequestMessage() };
-			controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-			controller.Request.RequestUri = new Uri(@"http://localhost:65032/identityapi/v1/users?q=uuid:uuid1,uuid2");
-
-			//Act
-			var actualResult = controller.GetUsers("uuid:uuid1,uuid2");
-			var result = actualResult.Content.ReadAsStringAsync().Result;
-			dynamic jsonResult = JsonConvert.DeserializeObject(result);
-
-			//Assert
-			Assert.AreEqual(HttpStatusCode.OK, actualResult.StatusCode);
-			Assert.IsEmpty(jsonResult["users"]);
-		}
-
-		[Test]
-		public void GetUsersByUuids_ErrorInManager_ShouldThrowHttpStatusInternalServerError()
-		{
-			//Arrange
-			var controller = new UsersController(_mockRepository.Object) { Request = new HttpRequestMessage() };
-			controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-			controller.Request.RequestUri = new Uri(@"http://localhost:65032/identityapi/v1/users?q=uuid:uuid1,uuid2");
-
-			//Act
-			var actualResult = controller.GetUsers("uuid:uuid1,uuid2");
-			var result = actualResult.Content.ReadAsStringAsync().Result;
-			dynamic jsonResult = JsonConvert.DeserializeObject(result);
-
-			//Assert
-			Assert.AreEqual(HttpStatusCode.InternalServerError, actualResult.StatusCode);
-			Assert.IsNotNull(jsonResult["transactionId"]);
-			Assert.AreEqual("500.AAA00001", jsonResult["errorCode"].ToString());
-		}
-
-		[Test]
-		public void GetUsersByUuids_NoColon_InvalidInputShouldReturnHttpStatusBadRequest()
-		{
-			//Arrange
-			var controller = new UsersController(_mockRepository.Object) { Request = new HttpRequestMessage() };
-			controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-
-			//Act
-			var actualResult = controller.GetUsers("abcdefghi123456789");
-			var result = actualResult.Content.ReadAsStringAsync().Result;
-			dynamic jsonResult = JsonConvert.DeserializeObject(result);
-
-			//Assert
-			Assert.AreEqual(HttpStatusCode.BadRequest, actualResult.StatusCode);
-			Assert.IsNotNull(jsonResult["transactionId"]);
-			Assert.AreEqual("400.AAA00006", jsonResult["errorCode"].ToString());
-		}
-
-		[Test]
-		public void GetUsersByUuids_KeyDoesNotMatch_InvalidInputShouldReturnHttpStatusBadRequest()
-		{
-			//Arrange
-			var controller = new UsersController(_mockRepository.Object) { Request = new HttpRequestMessage() };
-			controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-
-			//Act
-			var actualResult = controller.GetUsers("abc:uuid1,uuid2");
-			var result = actualResult.Content.ReadAsStringAsync().Result;
-			dynamic jsonResult = JsonConvert.DeserializeObject(result);
-
-			//Assert
-			Assert.AreEqual(HttpStatusCode.BadRequest, actualResult.StatusCode);
-			Assert.IsNotNull(jsonResult["transactionId"]);
-			Assert.AreEqual("400.AAA00009", jsonResult["errorCode"].ToString());
-		}
-		*/
-
+		
 	}
 }
