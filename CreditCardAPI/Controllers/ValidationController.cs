@@ -70,7 +70,7 @@ namespace CreditCardAPI.Controllers
 			}
 
 		}
-		private HttpResponseMessage BuildResponse(string strCardNumber, HttpStatusCode statusCode, int httpCode, string message, string IsExist = "Does not exist", string IsValid = "Invalid", string CardType = null)
+		private HttpResponseMessage BuildResponse(string strCardNumber, HttpStatusCode statusCode, int httpCode, string message, string IsExist = "Does not exist", string IsValid = "Invalid", string CardType = "UNKNOWN")
 		{
 			return Request.CreateResponse(statusCode, new ValidateCreditCardResponse()
 			{
