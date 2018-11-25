@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\CREDITCARD_TABLE.sql" />
+    <Content Include="Scripts\script_CreditcardDB.sql" />
     <Content Include="StoreProcedures\sp_ValidateCreditCard.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
