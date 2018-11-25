@@ -22,7 +22,13 @@ namespace CreditCardAPI.Models
 		/// Status Code of response 
 		/// </summary>
 		[JsonProperty("StatusCode")]
-		public string StatusCode { get; set; }
+		public int StatusCode { get; set; }
+
+		/// <summary>
+		/// Status message of response 
+		/// </summary>
+		[JsonProperty("StatusMessage")]
+		public string StatusMessage { get; set; }
 
 		/// <summary>
 		/// Card Valid

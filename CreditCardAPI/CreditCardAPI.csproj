@@ -220,6 +220,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValidationController.cs" />
     <Compile Include="Global.asax.cs">
@@ -227,6 +228,7 @@
     </Compile>
     <Compile Include="Helpers\DataObjectHandler.cs" />
     <Compile Include="Helpers\Logger.cs" />
+    <Compile Include="Helpers\RequestValidation.cs" />
     <Compile Include="Helpers\UTF8Handler.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ValidateCreditCardResponse.cs" />

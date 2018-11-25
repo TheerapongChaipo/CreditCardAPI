@@ -23,6 +23,7 @@ namespace CreditCardAPI.Controllers
 		[HttpGet]
 		[ActionName("ValidateCreditCard")]
 		[SwaggerResponse(HttpStatusCode.OK, Type = typeof(ValidateCreditCardResponse))]
+		[SwaggerResponse(HttpStatusCode.BadRequest, Type = typeof(ValidateCreditCardResponse))]
 		[SwaggerResponse(HttpStatusCode.NotFound, Type = typeof(ValidateCreditCardResponse))]
 		[SwaggerResponse(HttpStatusCode.InternalServerError, Type = typeof(ValidateCreditCardResponse))]
 		public HttpResponseMessage ValidateCreditCard(string creditcardnumber, string expirydate)
@@ -30,14 +31,34 @@ namespace CreditCardAPI.Controllers
 			MethodBase currentMethod = MethodBase.GetCurrentMethod();
 			CreditCardLogManager.Entering(string.Format("Card Number : {0}, Expiry Date : {1}", creditcardnumber, expirydate), currentClass, currentMethod);
 
-			return Request.CreateResponse(HttpStatusCode.InternalServerError, new ValidateCreditCardResponse() {
+			var errorMsg = RequestValidation.BadRequestValidationCardNumber(creditcardnumber, expirydate);
+			if(!string.IsNullOrEmpty(errorMsg)) {
+			   return BuildResponse(creditcardnumber, HttpStatusCode.BadRequest, (int)HttpStatusCode.BadRequest, errorMsg);
+			}
+
+
+
+			return Request.CreateResponse(HttpStatusCode.OK, new ValidateCreditCardResponse() {
 				CreditCardNumber = creditcardnumber,
-				StatusCode = HttpStatusCode.InternalServerError.ToString(),
+				StatusCode = (int)HttpStatusCode.OK,
 				IsExist = true,
 				IsValid = true,
 				CardType = "MasterCard"
 			});
 			
 		}
+		private HttpResponseMessage BuildResponse(string strCardNumber, HttpStatusCode statusCode, int httpCode, string message, bool IsExist = false, bool IsValid = false, string CardType = null)
+		{
+			return Request.CreateResponse(statusCode, new ValidateCreditCardResponse()
+			{
+				CreditCardNumber = strCardNumber,
+				StatusCode = httpCode,
+				StatusMessage = message,
+				IsExist = IsExist,
+				IsValid = IsValid,
+				CardType = CardType
+			});
+		}
+
 	}
 }
