@@ -1,8 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace CreditCardAPI.Models
 {
@@ -11,12 +7,29 @@ namespace CreditCardAPI.Models
 	/// </summary>
 	public class ValidateCreditCardResponse
 	{
-
 		/// <summary>
 		/// credit card number requestor
 		/// </summary>
 		[JsonProperty("CreditCardNumber")]
 		public string CreditCardNumber { get; set; }
+
+		/// <summary>
+		/// Credit Card Type
+		/// </summary>
+		[JsonProperty("CardType")]
+		public string CardType { get; set; }
+
+		/// <summary>
+		/// Card Valid
+		/// </summary>
+		[JsonProperty("IsValid")]
+		public string IsValid { get; set; }
+
+		/// <summary>
+		/// Card Exist
+		/// </summary>
+		[JsonProperty("IsExist")]
+		public string IsExist { get; set; }
 
 		/// <summary>
 		/// Status Code of response 
@@ -29,23 +42,5 @@ namespace CreditCardAPI.Models
 		/// </summary>
 		[JsonProperty("StatusMessage")]
 		public string StatusMessage { get; set; }
-
-		/// <summary>
-		/// Card Valid
-		/// </summary>
-		[JsonProperty("IsValid")]
-		public bool IsValid { get; set; }
-
-		/// <summary>
-		/// Card Exist
-		/// </summary>
-		[JsonProperty("IsExist")]
-		public bool IsExist { get; set; }
-
-		/// <summary>
-		/// Credit Card Type
-		/// </summary>
-		[JsonProperty("CardType")]
-		public string CardType { get; set; }
 	}
 }

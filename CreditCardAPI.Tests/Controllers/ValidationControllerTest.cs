@@ -46,8 +46,8 @@ namespace CreditCardAPI.Tests.Controllers
 			{
 				CreditCardNumber = null,
 				StatusCode = 400,
-				IsExist = false,
-				IsValid = false,
+				IsExist = "Does not exist",
+				IsValid = "Invalid",
 				StatusMessage = "Invalid Null Request: creditcardnumber"
 			};
 
@@ -77,8 +77,8 @@ namespace CreditCardAPI.Tests.Controllers
 			{
 				CreditCardNumber = "371449635398431",
 				StatusCode = 400,
-				IsExist = false,
-				IsValid = false,
+				IsExist = "Does not exist",
+				IsValid = "Invalid",
 				StatusMessage = "Invalid Null Request: expirydate"
 			};
 
@@ -155,13 +155,14 @@ namespace CreditCardAPI.Tests.Controllers
 		[Test]
 		public void ValidateCreditCard_ValidRequest_ShouldReturnValidCardandStatus200()
 		{
+		
 			//Arrange	
 			var expectedModelResponse = new ValidateCreditCardResponse
 			{
 				CreditCardNumber = "371449635398431",
 				StatusCode = 200,
-				IsExist = true,
-				IsValid = true,
+				IsExist = "Does not exist",
+				IsValid = "Valid",
 			};	
 	
 			controller.Request.RequestUri = new Uri(@"http://localhost:60855/api/Validation?creditcardnumber=371449635398431&expirydate=112018");

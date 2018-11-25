@@ -1,5 +1,7 @@
-2018-11-25 12:06:18,283 - INFO - ValidationController:ValidateCreditCard: 2131213213
-2018-11-25 12:09:58,393 - INFO - ValidationController:ValidateCreditCard:frefrggerg
-2018-11-25 12:12:51,917 - INFO - ValidationController:ValidateCreditCard:Entering - Card Number : 213123, Expiry Date : 31232
-2018-11-25 12:14:25,922 - INFO - ValidationController:ValidateCreditCard:Entering - Card Number : 34, Expiry Date : 234
-2018-11-25 12:16:02,633 - INFO - ValidationController:ValidateCreditCard:Entering - Card Number : 2312, Expiry Date : 3123
+2018-11-25 16:08:24,054 - INFO - ValidationController:ValidateCreditCard:Entering - Card Number : 371449635398431, Expiry Date : 112018
+2018-11-25 17:40:31,456 - INFO - ValidationController:ValidateCreditCard:Entering - Card Number : fef, Expiry Date : fwef
+2018-11-25 17:40:33,888 - ERROR - RequestValidation:BadRequestValidationCardNumber:Invalid - Credit Card Number out of length.
+2018-11-25 23:04:11,491 - INFO - ValidationController:ValidateCreditCard:Entering - Card Number : 3530111333300000, Expiry Date : 122018
+2018-11-25 23:11:23,130 - INFO - ValidationController:ValidateCreditCard:Entering - Card Number : 3530111333300000, Expiry Date : 122018
+2018-11-25 23:30:22,510 - INFO - ValidationController:ValidateCreditCard:Entering - Card Number : 3530111333300000, Expiry Date : 122016
+2018-11-25 23:34:31,055 - INFO - ValidationController:ValidateCreditCard:Entering - Card Number : 3530111333300000, Expiry Date : 112018

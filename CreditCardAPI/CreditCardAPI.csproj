@@ -93,6 +93,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -223,6 +224,27 @@
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValidationController.cs" />
+    <Compile Include="DataAccess\CreditCard.cs">
+      <DependentUpon>CreditcardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\CreditcardModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreditcardModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\CreditcardModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreditcardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\CreditcardModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreditcardModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\ValidateCreditCard_Result.cs">
+      <DependentUpon>CreditcardModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -237,6 +259,16 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DataAccess\CreditcardModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CreditcardModel.edmx</DependentUpon>
+      <LastGenOutput>CreditcardModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataAccess\CreditcardModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CreditcardModel.edmx</DependentUpon>
+      <LastGenOutput>CreditcardModel.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -249,10 +281,25 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Service\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="log4net.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="DataAccess\CreditcardModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CreditcardModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataAccess\CreditcardModel.edmx.diagram">
+      <DependentUpon>CreditcardModel.edmx</DependentUpon>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

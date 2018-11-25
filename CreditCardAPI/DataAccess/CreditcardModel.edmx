@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CreditcardDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CreditCard">
+          <Key>
+            <PropertyRef Name="CreditCardID" />
+          </Key>
+          <Property Name="CreditCardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardType" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="CardNumber" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="ExpMonth" Type="tinyint" Nullable="false" />
+          <Property Name="ExpYear" Type="smallint" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Function Name="ValidateCreditCard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="P_CARDNUMBER" Type="varchar" Mode="In" />
+          <Parameter Name="P_EXPRIRYDATE" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="CreditcardDBModelStoreContainer">
+          <EntitySet Name="CreditCard" EntityType="Self.CreditCard" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CreditcardDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CreditCard">
+          <Key>
+            <PropertyRef Name="CreditCardID" />
+          </Key>
+          <Property Name="CreditCardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardType" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CardNumber" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ExpMonth" Type="Byte" Nullable="false" />
+          <Property Name="ExpYear" Type="Int16" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="CreditcardDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CreditCards" EntityType="Self.CreditCard" />
+          <FunctionImport Name="ValidateCreditCard" ReturnType="Collection(CreditcardDBModel.ValidateCreditCard_Result)">
+            <Parameter Name="P_CARDNUMBER" Mode="In" Type="String" />
+            <Parameter Name="P_EXPRIRYDATE" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ValidateCreditCard_Result">
+          <Property Type="String" Name="CARDNUMBER" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="CARDTYPE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ISVALID" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="ISEXIST" Nullable="true" MaxLength="25" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CreditcardDBModelStoreContainer" CdmEntityContainer="CreditcardDBEntities">
+          <EntitySetMapping Name="CreditCards">
+            <EntityTypeMapping TypeName="CreditcardDBModel.CreditCard">
+              <MappingFragment StoreEntitySet="CreditCard">
+                <ScalarProperty Name="CreditCardID" ColumnName="CreditCardID" />
+                <ScalarProperty Name="CardType" ColumnName="CardType" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="ExpMonth" ColumnName="ExpMonth" />
+                <ScalarProperty Name="ExpYear" ColumnName="ExpYear" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ValidateCreditCard" FunctionName="CreditcardDBModel.Store.ValidateCreditCard">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CreditcardDBModel.ValidateCreditCard_Result">
+                <ScalarProperty Name="CARDNUMBER" ColumnName="CARDNUMBER" />
+                <ScalarProperty Name="CARDTYPE" ColumnName="CARDTYPE" />
+                <ScalarProperty Name="ISVALID" ColumnName="ISVALID" />
+                <ScalarProperty Name="ISEXIST" ColumnName="ISEXIST" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

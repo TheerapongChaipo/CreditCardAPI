@@ -1,34 +1,31 @@
 ﻿using CreditCardAPI.Common;
-using CreditCardAPI.Models;
 using System;
-using System.Net;
-using System.Net.Http;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace CreditCardAPI.Helpers
 {
 	public class RequestValidation
-	{	
+	{
 
-		public static string BadRequestValidationCardNumber( string creditcardnumber , string expirydate)
+		public static string BadRequestValidationCardNumber(string creditcardnumber, string expirydate)
 		{
 			MethodBase currentMethod = MethodBase.GetCurrentMethod();
 			Type currentClass = typeof(RequestValidation);
 			var message = string.Empty;
-			
+
 			//check empty value
 			if (string.IsNullOrEmpty(creditcardnumber))
 			{
 				const string errorMsg = Constants.InvalidRequest_creditcardNumber;
 				CreditCardLogManager.Error(errorMsg, currentClass, currentMethod);
 				return errorMsg;
-			}	
-				
+			}
+
 			if (string.IsNullOrEmpty(expirydate))
 			{
 				const string errorMsg = Constants.InvalidRequest_expirydate;
-				CreditCardLogManager.Error(errorMsg, currentClass, currentMethod);				
+				CreditCardLogManager.Error(errorMsg, currentClass, currentMethod);
 				return errorMsg;
 			}
 
@@ -48,7 +45,7 @@ namespace CreditCardAPI.Helpers
 				return Constants.InvalidRequest_creditcardNumberOutofLength;
 			}
 
-			
+
 			//check expirydate Pattern			
 			string expirydatePattern = @"^((0[1-9])|(1[0-2]))(\d{4})$";
 			if (expirydate.Length == 6)
@@ -59,13 +56,14 @@ namespace CreditCardAPI.Helpers
 					return Constants.InvalidRequest_UnknownExpirydate;
 				}
 			}
-			else {
+			else
+			{
 				CreditCardLogManager.Error(Constants.InvalidRequest_expirydateOutofLength, currentClass, currentMethod);
 				return Constants.InvalidRequest_expirydateOutofLength;
 			}
-			
-			
+
+
 			return message;
-		}		
+		}
 	}
 }

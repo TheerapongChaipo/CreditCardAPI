@@ -27,7 +27,7 @@ namespace CreditCardAPI.Helpers
 		public static T DeSerializeJsonStringToObject<T>(string json)
 		{
 			return JsonConvert.DeserializeObject<T>(json);
-		}	
+		}
 
 		//serialize object to string
 		public static String SerializeObjToXmlString<T>(T obj)
@@ -45,7 +45,7 @@ namespace CreditCardAPI.Helpers
 
 		public static String SerializeObjToJsonString<T>(T obj)
 		{
-			return JsonConvert.SerializeObject(obj);			
+			return JsonConvert.SerializeObject(obj);
 		}
 
 		public static Stream SerializeObjToXmlStream<T>(T obj)
@@ -85,6 +85,6 @@ namespace CreditCardAPI.Helpers
 
 			// Create an XmlSerializer object to perform the serialization           
 			return memoryStream;
-		}	
+		}
 	}
 }
